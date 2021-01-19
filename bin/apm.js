@@ -4,7 +4,7 @@ const { exec } = require('child_process')
 const http=require('http')
 const args=process.argv.splice(2)
 const {createWriteStream}=require('fs')
-const LOCAL_VER='0.0.8'
+const LOCAL_VER='0.0.9'
 const path=require('path')
 const appdir=path.dirname(require.main.filename)
 
@@ -34,6 +34,7 @@ if(args[0]=='install'){
         }
         http.request(options, callback).end()
     }
+    else console.log('Not enough args')
 }
 else if(args[0]=='uninstall'){
     if(args[1]!=null){
@@ -61,6 +62,7 @@ else if(args[0]=='uninstall'){
         }
         http.request(options, callback).end()
     }
+    else console.log('Not enough args')
 }
 else if(args[0]=='publish'){
     if(args[1]!=null){
@@ -85,7 +87,9 @@ else if(args[0]=='publish'){
             }
             http.request(options, callback).end()
         }
+        else console.log('Not enough args')
     }
+    else console.log('Not enough args')
 }
 else if(args[0]=='unpublish'){
     if(args[1]!=null){
@@ -103,35 +107,36 @@ else if(args[0]=='unpublish'){
         }
         http.request(options, callback).end()
     }
+    else console.log('Not enough args')
 }
 else if(args[0]=='update'){
     console.log(`Searching for updates`)
-        const options={
-            host: 'home.venovedo.ro',
-            port: 80,
-            path: `/ver`,
-            method: 'GET'
-        }
-        callback=function(response){
-            let str=''
-            response.on('data', chunk=>{
-                str+=chunk
-            })
-            response.on('end', ()=>{
-                if(str!=LOCAL_VER){
-                    console.log('Downloading update')
-                    const file=createWriteStream(`${appdir}/../download.zip`)
-                    const request=http.get("http://home.venovedo.ro/download.zip", response=>{
-                        response.pipe(file)
-                    })
-                    console.log('Installing update')
-                    exec(`unzip ${appdir}/download.zip -o -d ${appdir}/../`)
-                    console.log('Update installed')
-                    exec(`rm ${appdir}/../download.zip`)
-                }
-                else console.log('Up to date')
-            })
-        }
-        http.request(options, callback).end()
+    const options={
+        host: 'home.venovedo.ro',
+        port: 80,
+        path: `/ver`,
+        method: 'GET'
+    }
+    callback=function(response){
+        let str=''
+        response.on('data', chunk=>{
+            str+=chunk
+        })
+        response.on('end', ()=>{
+            if(str!=LOCAL_VER){
+                console.log('Downloading update')
+                const file=createWriteStream(`${appdir}/../download.zip`)
+                const request=http.get("http://home.venovedo.ro/download.zip", response=>{
+                    response.pipe(file)
+                })
+                console.log('Installing update')
+                exec(`unzip ${appdir}/download.zip -o -d ${appdir}/../`)
+                console.log('Update installed')
+                exec(`rm ${appdir}/../download.zip`)
+            }
+            else console.log('Up to date')
+        })
+    }
+    http.request(options, callback).end()
 }
 else console.log("Works")
