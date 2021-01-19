@@ -4,7 +4,7 @@ const { exec } = require('child_process')
 const http=require('http')
 const args=process.argv.splice(2)
 const {createWriteStream}=require('fs')
-const LOCAL_VER='0.0.9'
+const LOCAL_VER='0.0.11'
 const path=require('path')
 const appdir=path.dirname(require.main.filename)
 
@@ -130,7 +130,7 @@ else if(args[0]=='update'){
                     response.pipe(file)
                 })
                 console.log('Installing update')
-                exec(`unzip -o ${appdir}/download.zip -d ${appdir}/../`)
+                exec(`unzip -o ${appdir}/../download.zip -d ${appdir}/../`)
                 console.log('Update installed')
                 exec(`rm ${appdir}/../download.zip`)
             }
