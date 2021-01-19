@@ -4,7 +4,7 @@ const { exec } = require('child_process')
 const http=require('http')
 const args=process.argv.splice(2)
 const {createWriteStream}=require('fs')
-const LOCAL_VER='0.0.11'
+const LOCAL_VER='0.0.10'
 const path=require('path')
 const appdir=path.dirname(require.main.filename)
 
