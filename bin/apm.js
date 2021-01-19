@@ -3,6 +3,8 @@
 const { exec } = require('child_process')
 const http=require('http')
 const args=process.argv.splice(2)
+const {createWriteStream}=require('fs')
+const LOCAL_VER='0.0.7'
 
 if(args[0]=='install'){
     if(args[1]!=null){
@@ -99,5 +101,34 @@ else if(args[0]=='unpublish'){
         }
         http.request(options, callback).end()
     }
+}
+else if(args[0]=='update'){
+    console.log(`Searching for updates`)
+        const options={
+            host: 'home.venovedo.ro',
+            port: 80,
+            path: `/ver`,
+            method: 'GET'
+        }
+        callback=function(response){
+            let str=''
+            response.on('data', chunk=>{
+                str+=chunk
+            })
+            response.on('end', ()=>{
+                if(str!=LOCAL_VER){
+                    console.log('Downloading update')
+                    const file=createWriteStream('download.zip')
+                    const request=http.get("http://home.venovedo.ro/download.zip", response=>{
+                        response.pipe(file)
+                    })
+                    console.log('Installing update')
+                    exec('unzip download.zip -o -d .')
+                    console.log('Update installed')
+                }
+                else console.log('Up to date')
+            })
+        }
+        http.request(options, callback).end()
 }
 else console.log("Works")
