@@ -1,1 +1,1 @@
-console.log("APM was installed. use it with apm install")
+console.log("APM was installed. Documentation here: https://github.com/papucicumuci/apm/blob/master/README.md")
