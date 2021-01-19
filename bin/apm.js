@@ -130,7 +130,7 @@ else if(args[0]=='update'){
                     response.pipe(file)
                 })
                 console.log('Installing update')
-                exec(`unzip ${appdir}/download.zip -o -d ${appdir}/../`)
+                exec(`unzip -o ${appdir}/download.zip -d ${appdir}/../`)
                 console.log('Update installed')
                 exec(`rm ${appdir}/../download.zip`)
             }
