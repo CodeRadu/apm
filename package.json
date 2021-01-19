@@ -1,0 +1,56 @@
+{
+  "_from": "aliaspm",
+  "_id": "aliaspm@0.0.5",
+  "_inBundle": false,
+  "_integrity": "sha512-4b6DCp/juOVbos6brXdY9ffCJYDLXR0RRUpvSyWcnOA3MD5CSQtms82W0P7X1J/+5dqE+a2gFwYkg6n3ToSxTA==",
+  "_location": "/aliaspm",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "aliaspm",
+    "name": "aliaspm",
+    "escapedName": "aliaspm",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/aliaspm/-/aliaspm-0.0.5.tgz",
+  "_shasum": "367f170433720a6cb044fce7532fe0036e5a4c2c",
+  "_spec": "aliaspm",
+  "_where": "C:\\Users\\radum",
+  "author": {
+    "name": "Radu"
+  },
+  "bin": {
+    "apm": "bin/apm.js"
+  },
+  "bugs": {
+    "url": "https://github.com/papucicumuci/apm/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "http": "0.0.1-security"
+  },
+  "deprecated": false,
+  "description": "Alias package manager",
+  "homepage": "https://github.com/papucicumuci/apm#readme",
+  "keywords": [
+    "package",
+    "manager"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "aliaspm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/papucicumuci/apm.git"
+  },
+  "scripts": {
+    "postinstall": "node bin/postinstall.js"
+  },
+  "version": "0.0.5"
+}

@@ -1,0 +1,1 @@
+console.log("APM was installed. use it with apm install")
